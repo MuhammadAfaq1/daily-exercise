@@ -41,6 +41,7 @@ void insertAtTail(node* &head , int val ){
 }
 	
 	void  deleteAtHead(node * & head){
+		cout<<"head node deleted"<<endl;
 		node* toDelete=head;
 		head = head -> next;
 		head -> prev = NULL;
@@ -49,7 +50,7 @@ void insertAtTail(node* &head , int val ){
 	}
 	
 	void Delete(node*  &head , int pos){
-		
+		cout<<"Node at position "<<pos<<" deleted"<<endl;
 		if(pos == 1){
 			deleteAtHead(head);
 			return;
@@ -71,6 +72,7 @@ void insertAtTail(node* &head , int val ){
 	
 	void display(node* head){
 	node* temp=head;
+		cout<<"Doubly linked list: ";
 	while(temp != NULL){
 		cout<<temp->data<<"  ";
 		temp=temp->next;
@@ -78,6 +80,45 @@ void insertAtTail(node* &head , int val ){
 	}
 	cout<<endl;
 	}
+	
+void moveToHead(node* &head , int num){
+
+		
+		node * temp=head;
+	 
+		while(temp!=NULL){
+			if(head->data==num)
+				return;
+			
+			temp=temp->next;
+			
+			if(temp->data == num){
+				cout<<num<<" moved to head"<<endl;
+				if(temp->next != NULL){
+			
+				temp->prev->next=temp->next;
+				temp->next->prev=temp->prev;
+				}
+				else if(temp->next == NULL){
+				
+				temp->prev->next=NULL;
+				}
+				
+				head->prev=temp;
+				temp->next=head;
+				temp->prev=NULL;
+				head=temp;
+				
+				return;
+			}
+			
+//			if(temp->next==NULL && temp->data!=num)
+//			cout<<num<<" Not found"<<endl;			
+		
+	  }
+	  
+	}
+
 
 int main(){
 	node * head=NULL;
@@ -86,7 +127,9 @@ int main(){
 	insertAtTail(head,4);
 	insertAtTail(head,5);
 	insertAtHead(head,1);
-	Delete(head,2);
-	deleteAtHead(head);
+	display(head);
+	//Delete(head,2);
+	//deleteAtHead(head);
+	moveToHead(head,4);
 	display(head);
 }
